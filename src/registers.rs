@@ -49,6 +49,52 @@ impl Registers {
         self.f = (val & 0xFF) as u8;
     }
 
+    pub fn get_reg(&mut self, code: u8) -> u8 {
+        match code {
+            0 => self.b,
+            1 => self.c,
+            2 => self.d,
+            3 => self.e,
+            4 => self.h,
+            5 => self.l,
+            7 => self.a,
+            _ => panic!() // should not happen.
+        }
+    }
+
+    pub fn get_reg16(&mut self, code: u8) -> u16 {
+        match code {
+            0 => self.bc(),
+            1 => self.de(),
+            2 => self.hl(),
+            3 => self.af(),
+            _ => panic!()
+        }
+    }
+
+    pub fn set_reg(&mut self, code: u8, val: u8) {
+        match code {
+            0 => self.b = val,
+            1 => self.c = val,
+            2 => self.d = val,
+            3 => self.e = val,
+            4 => self.h = val,
+            5 => self.l = val,
+            7 => self.a = val,
+            _ => panic!() // should not happen.
+        }
+    }
+
+    pub fn set_reg16(&mut self, code: u8, val: u16) {
+        match code {
+            0 => self.set_bc(val),
+            1 => self.set_de(val),
+            2 => self.set_hl(val),
+            3 => self.set_af(val),
+            _ => panic!()
+        }
+    }
+
     pub fn set_flag(&mut self, flag: RegisterFlags, value: bool) {
         if value {
             self.f |= flag as u8;
