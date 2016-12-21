@@ -1,0 +1,7 @@
+[package]
+name = "gb_em"
+version = "0.1.0"
+authors = ["TieSoul <tdbaksteen@gmail.com>"]
+
+[dependencies]
+ sdl2 = "0.25"
